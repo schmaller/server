@@ -1598,7 +1598,6 @@
     <DeprecatedMethod>
       <code><![CDATA[Files::buildNotExistingFileName($shareFolder, $share['name'])]]></code>
       <code><![CDATA[Files::buildNotExistingFileName('/', $name)]]></code>
-      <code><![CDATA[insertIfNotExist]]></code>
       <code><![CDATA[sendNotification]]></code>
       <code><![CDATA[sendNotification]]></code>
     </DeprecatedMethod>
@@ -2722,7 +2721,6 @@
   <file src="apps/user_ldap/lib/Mapping/AbstractMapping.php">
     <DeprecatedMethod>
       <code><![CDATA[getDatabasePlatform]]></code>
-      <code><![CDATA[insertIfNotExist]]></code>
     </DeprecatedMethod>
     <RedundantCondition>
       <code><![CDATA[isset($qb)]]></code>
