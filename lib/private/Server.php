@@ -179,6 +179,7 @@ use OCP\IBinaryFinder;
 use OCP\ICache;
 use OCP\ICacheFactory;
 use OCP\ICertificateManager;
+use OCP\IConfig;
 use OCP\IDateTimeFormatter;
 use OCP\IDateTimeZone;
 use OCP\IDBConnection;
@@ -1265,8 +1266,16 @@ class Server extends ServerContainer implements IServerContainer {
 		$this->registerAlias(IRichTextFormatter::class, \OC\RichObjectStrings\RichTextFormatter::class);
 
 		$this->registerAlias(ISignatureManager::class, SignatureManager::class);
+//
+//		$this->registerAlias(ISnowflakeGenerator::class, SnowflakeGenerator::class);
+		$this->registerService(ISnowflakeGenerator::class, function (ContainerInterface $c) {
+			return new SnowflakeGenerator(
+				$c->get(ITimeFactory::class),
+				$c->get(IConfig::class),
+				$c->get(ISequence::class),
+			);
+		});
 
-		$this->registerAlias(ISnowflakeGenerator::class, SnowflakeGenerator::class);
 		$this->registerService(ISequence::class, function (ContainerInterface $c): ISequence {
 			if (PHP_SAPI !== 'cli') {
 				$sequence = $c->get(APCuSequence::class);
@@ -1277,7 +1286,12 @@ class Server extends ServerContainer implements IServerContainer {
 
 			return $c->get(FileSequence::class);
 		}, false);
-		$this->registerAlias(ISnowflakeDecoder::class, SnowflakeDecoder::class);
+
+
+		$this->registerService(ISnowflakeDecoder::class, function (ContainerInterface $c) {
+			return new SnowflakeDecoder();
+		});
+//		$this->registerAlias(ISnowflakeDecoder::class, SnowflakeDecoder::class);
 
 		$this->connectDispatcher();
 	}

@@ -94,18 +94,6 @@ class Application extends App implements IBootstrap {
 		$context->registerConfigLexicon(ConfigLexicon::class);
 
 		$context->registerCapability(Capabilities::class);
-
-		$context->registerService(ISnowflakeGenerator::class, function (ContainerInterface $c) {
-			return new SnowflakeGenerator(
-				$c->get(ITimeFactory::class),
-				$c->get(IConfig::class),
-				$c->get(ISequence::class),
-			);
-		});
-
-		$context->registerService(ISnowflakeDecoder::class, function (ContainerInterface $c) {
-			return new SnowflakeDecoder();
-		});
 	}
 
 	public function boot(IBootContext $context): void {
