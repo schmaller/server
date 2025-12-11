@@ -22,9 +22,6 @@ use OC\Core\Listener\AddMissingPrimaryKeyListener;
 use OC\Core\Listener\BeforeTemplateRenderedListener;
 use OC\Core\Listener\PasswordUpdatedListener;
 use OC\Core\Notification\CoreNotifier;
-use OC\Snowflake\ISequence;
-use OC\Snowflake\SnowflakeDecoder;
-use OC\Snowflake\SnowflakeGenerator;
 use OC\TagManager;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -32,17 +29,12 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Http\Events\BeforeLoginTemplateRenderedEvent;
 use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
-use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\DB\Events\AddMissingIndicesEvent;
 use OCP\DB\Events\AddMissingPrimaryKeyEvent;
-use OCP\IConfig;
-use OCP\Snowflake\ISnowflakeDecoder;
-use OCP\Snowflake\ISnowflakeGenerator;
 use OCP\User\Events\BeforeUserDeletedEvent;
 use OCP\User\Events\PasswordUpdatedEvent;
 use OCP\User\Events\UserDeletedEvent;
 use OCP\Util;
-use Psr\Container\ContainerInterface;
 
 /**
  * Class Application

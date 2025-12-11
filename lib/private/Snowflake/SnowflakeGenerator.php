@@ -24,8 +24,8 @@ use Override;
 final readonly class SnowflakeGenerator implements ISnowflakeGenerator {
 	public function __construct(
 		private ITimeFactory $timeFactory,
-		private IConfig      $config,
-		private ISequence    $sequenceGenerator,
+		private IConfig $config,
+		private ISequence $sequenceGenerator,
 	) {
 	}
 

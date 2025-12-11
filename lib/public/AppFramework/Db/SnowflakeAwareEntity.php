@@ -29,10 +29,6 @@ abstract class SnowflakeAwareEntity extends Entity {
 	/** @var array<string, \OCP\DB\Types::*> */
 	private array $_fieldTypes = ['id' => Types::STRING];
 
-	private ISnowflakeGenerator $snowflakeGenerator;
-	private ISnowflakeDecoder $snowflakeDecoder;
-
-
 	/**
 	 * Automatically creates a snowflake ID
 	 *
@@ -41,7 +37,7 @@ abstract class SnowflakeAwareEntity extends Entity {
 	#[\Override]
 	public function setId(): void {
 		if (empty($this->id)) {
-			$this->id = $this->snowflakeGenerator->nextId();
+			$this->id = Server::get(ISnowflakeGenerator::class)->nextId();
 			$this->markFieldUpdated('id');
 		}
 	}
@@ -65,7 +61,7 @@ abstract class SnowflakeAwareEntity extends Entity {
 		}
 
 		if ($this->snowflake === null) {
-			$this->snowflake = $this->snowflakeDecoder->decode($this->id);
+			$this->snowflake = Server::get(ISnowflakeDecoder::class)->decode($this->id);
 		}
 
 		return $this->snowflake;
