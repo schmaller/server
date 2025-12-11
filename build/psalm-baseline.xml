@@ -1523,12 +1523,6 @@
       <code><![CDATA[public function __construct(]]></code>
     </ConstructorSignatureMismatch>
   </file>
-  <file src="apps/files_sharing/lib/AppInfo/Application.php">
-    <DeprecatedMethod>
-      <code><![CDATA[query]]></code>
-      <code><![CDATA[query]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="apps/files_sharing/lib/Capabilities.php">
     <DeprecatedMethod>
       <code><![CDATA[getAppValue]]></code>
