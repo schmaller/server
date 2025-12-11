@@ -36,13 +36,13 @@ class SnowflakeDecodeId extends Base {
 
 		$rows = [
 			['Snowflake ID', $snowflakeId],
-			['Seconds', $data['seconds']],
-			['Milliseconds', $data['milliseconds']],
-			['Created from CLI', $data['isCli'] ? 'yes' : 'no'],
-			['Server ID', $data['serverId']],
-			['Sequence ID', $data['sequenceId']],
-			['Creation timestamp', $data['createdAt']->format('U.v')],
-			['Creation date', $data['createdAt']->format('Y-m-d H:i:s.v')],
+			['Seconds', $data->getSeconds()],
+			['Milliseconds', $data->getMilliseconds()],
+			['Created from CLI', $data->isCli() ? 'yes' : 'no'],
+			['Server ID', $data->getServerId()],
+			['Sequence ID', $data->getSequenceId()],
+			['Creation timestamp', $data->getCreatedAt()->format('U.v')],
+			['Creation date', $data->getCreatedAt()->format('Y-m-d H:i:s.v')],
 		];
 
 		$table = new Table($output);
