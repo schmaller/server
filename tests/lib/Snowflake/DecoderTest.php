@@ -31,10 +31,10 @@ class DecoderTest extends TestCase {
 	): void {
 		$data = $this->decoder->decode($snowflakeId);
 
-		$this->assertEquals($timestamp, (float)$data['createdAt']->format('U.v'));
-		$this->assertEquals($serverId, $data['serverId']);
-		$this->assertEquals($sequenceId, $data['sequenceId']);
-		$this->assertEquals($isCli, $data['isCli']);
+		$this->assertEquals($timestamp, (float)$data->getCreatedAt()->format('U.v'));
+		$this->assertEquals($serverId, $data->getServerId());
+		$this->assertEquals($sequenceId, $data->getSequenceId());
+		$this->assertEquals($isCli, $data->isCli());
 	}
 
 	public static function provideSnowflakeIds(): array {
