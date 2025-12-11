@@ -28,10 +28,8 @@ interface ISnowflakeDecoder {
 	 *  - createdAt: timestamp at which ID was generated
 	 *  - isCli: if ID was generated using CLI or not
 	 *
-	 * @return array{createdAt: \DateTimeImmutable, serverId: int<0,1023>, sequenceId: int<0,4095>, isCli: bool, seconds: positive-int, milliseconds: int<0,999>}
+	 * @return Snowflake
 	 * @since 33.0
 	 */
-	public function decode(string $snowflakeId): array;
-
-	public function decodeToSnowflake(string $snowflakeId): Snowflake;
+	public function decode(string $snowflakeId): Snowflake;
 }

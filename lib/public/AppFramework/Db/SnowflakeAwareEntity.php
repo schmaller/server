@@ -15,6 +15,8 @@ use OCP\Snowflake\ISnowflakeGenerator;
 use OCP\Snowflake\Snowflake;
 
 /**
+ * Entity with snowflake support
+ *
  * @since 33.0.0
  */
 #[Consumable(since: '33.0.0')]
@@ -50,9 +52,6 @@ abstract class SnowflakeAwareEntity extends Entity {
 	}
 
 	public function getCreatedAt(): ?\DateTimeImmutable {
-		if (empty($this->id)) {
-			return null;
-		}
 		return $this->getSnowflake()?->getCreatedAt();
 	}
 
@@ -61,8 +60,8 @@ abstract class SnowflakeAwareEntity extends Entity {
 			return null;
 		}
 
-		if (empty($this->snowflake)) {
-			$this->snowflake = Server::get(ISnowflakeDecoder::class)->decodeToSnowflake($this->id);
+		if ($this->snowflake === null) {
+			$this->snowflake = Server::get(ISnowflakeDecoder::class)->decode($this->id);
 		}
 
 		return $this->snowflake;

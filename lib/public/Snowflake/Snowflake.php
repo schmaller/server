@@ -17,7 +17,7 @@ use OCP\AppFramework\Attribute\Consumable;
  * @since 33.0.0
  */
 #[Consumable(since: '33.0.0')]
-final class Snowflake {
+final readonly class Snowflake {
 	/**
 	 * @psalm-param int<0,1023> $serverId
 	 * @psalm-param int<0,4095> $sequenceId
@@ -32,17 +32,6 @@ final class Snowflake {
 		public int $milliseconds,
 		public \DateTimeImmutable $createdAt,
 	) {
-	}
-
-	public function toArray(): array {
-		return [
-			'serverId' => $this->getServerId(),
-			'sequenceId' => $this->getSequenceId(),
-			'isCli' => $this->isCli(),
-			'seconds' => $this->getSeconds(),
-			'milliseconds' => $this->getMilliseconds(),
-			'createdAt' => $this->getCreatedAt(),
-		];
 	}
 
 	/**

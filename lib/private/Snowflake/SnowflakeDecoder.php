@@ -23,7 +23,7 @@ use Override;
  */
 final class SnowflakeDecoder implements ISnowflakeDecoder {
 	#[Override]
-	public function decode(string $snowflakeId): array {
+	public function decode(string $snowflakeId): Snowflake {
 		if (!ctype_digit($snowflakeId)) {
 			throw new \Exception('Invalid Snowflake ID: ' . $snowflakeId);
 		}
@@ -41,7 +41,14 @@ final class SnowflakeDecoder implements ISnowflakeDecoder {
 			)
 		);
 
-		return $data;
+		return new Snowflake(
+			$data['serverId'],
+			$data['sequenceId'],
+			$data['isCli'],
+			$data['seconds'],
+			$data['milliseconds'],
+			$data['createdAt'],
+		);
 	}
 
 	private function decode64bits(int $snowflakeId): array {
@@ -119,17 +126,5 @@ final class SnowflakeDecoder implements ISnowflakeDecoder {
 		}
 
 		return str_pad($hex, 16, '0', STR_PAD_LEFT);
-	}
-
-	public function decodeToSnowflake(string $snowflakeId): Snowflake {
-		$data = $this->decode($snowflakeId);
-		return new Snowflake(
-			$data['serverId'],
-			$data['sequenceId'],
-			$data['isCli'],
-			$data['seconds'],
-			$data['milliseconds'],
-			$data['createdAt'],
-		);
 	}
 }
