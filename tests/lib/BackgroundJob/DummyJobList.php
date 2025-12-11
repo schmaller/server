@@ -13,7 +13,6 @@ use OC\BackgroundJob\JobList;
 use OCP\BackgroundJob\IJob;
 use OCP\BackgroundJob\Job;
 use OCP\Server;
-use OCP\Snowflake\IGenerator;
 use OCP\Snowflake\ISnowflakeGenerator;
 
 /**

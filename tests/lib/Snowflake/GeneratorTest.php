@@ -49,21 +49,21 @@ class GeneratorTest extends TestCase {
 
 		$this->assertIsString($snowflakeId);
 		// Check timestamp
-		$this->assertGreaterThan(time() - 30, $data['createdAt']->format('U'));
+		$this->assertGreaterThan(time() - 30, $data->getCreatedAt()->format('U'));
 
 		// Check serverId
-		$this->assertGreaterThanOrEqual(0, $data['serverId']);
-		$this->assertLessThanOrEqual(1023, $data['serverId']);
+		$this->assertGreaterThanOrEqual(0, $data->getServerId());
+		$this->assertLessThanOrEqual(1023, $data->getServerId());
 
 		// Check sequenceId
-		$this->assertGreaterThanOrEqual(0, $data['sequenceId']);
-		$this->assertLessThanOrEqual(4095, $data['sequenceId']);
+		$this->assertGreaterThanOrEqual(0, $data->getSequenceId());
+		$this->assertLessThanOrEqual(4095, $data->getSequenceId());
 
 		// Check CLI
-		$this->assertTrue($data['isCli']);
+		$this->assertTrue($data->isCli());
 
 		// Check serverId
-		$this->assertEquals(42, $data['serverId']);
+		$this->assertEquals(42, $data->getServerId());
 	}
 
 	#[DataProvider('provideSnowflakeData')]
@@ -75,9 +75,9 @@ class GeneratorTest extends TestCase {
 		$generator = new SnowflakeGenerator($timeFactory, $this->config, $this->sequence);
 		$data = $this->decoder->decode($generator->nextId());
 
-		$this->assertEquals($expectedSeconds, ($data['createdAt']->format('U') - ISnowflakeGenerator::TS_OFFSET));
-		$this->assertEquals($expectedMilliseconds, (int)$data['createdAt']->format('v'));
-		$this->assertEquals(42, $data['serverId']);
+		$this->assertEquals($expectedSeconds, ($data->getCreatedAt()->format('U') - ISnowflakeGenerator::TS_OFFSET));
+		$this->assertEquals($expectedMilliseconds, (int)$data->getCreatedAt()->format('v'));
+		$this->assertEquals(42, $data->getServerId());
 	}
 
 	public static function provideSnowflakeData(): array {
