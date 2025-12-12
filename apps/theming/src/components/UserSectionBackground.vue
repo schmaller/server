@@ -4,7 +4,10 @@
 -->
 
 <template>
-	<div class="background-selector" data-user-theming-background-settings>
+	<NcSettingsSection
+		class="background"
+		:name="t('theming', 'Background and color')"
+		:description="t('theming', 'The background can be set to an image from the default set, a custom uploaded image, or a plain color.')">
 		<!-- Custom background -->
 		<button
 			:aria-pressed="backgroundImage === 'custom'"
@@ -78,7 +81,7 @@
 			@click="setShipped(shippedBackground.name)">
 			<Check :size="44" />
 		</button>
-	</div>
+	</NcSettingsSection>
 </template>
 
 <script>
@@ -91,7 +94,7 @@ import NcColorPicker from '@nextcloud/vue/components/NcColorPicker'
 import Check from 'vue-material-design-icons/Check.vue'
 import ImageEdit from 'vue-material-design-icons/ImageEdit.vue'
 import ColorPalette from 'vue-material-design-icons/PaletteOutline.vue'
-import { logger } from '../logger.ts'
+import { logger } from '../utils/logger.ts'
 
 const shippedBackgroundList = loadState('theming', 'shippedBackgrounds')
 const backgroundImage = loadState('theming', 'userBackgroundImage')
