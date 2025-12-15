@@ -25,12 +25,12 @@ final readonly class Snowflake {
 	 * @psalm-param int<0,999> $milliseconds
 	 */
 	public function __construct(
-		public int $serverId,
-		public int $sequenceId,
-		public bool $isCli,
-		public int $seconds,
-		public int $milliseconds,
-		public \DateTimeImmutable $createdAt,
+		private int $serverId,
+		private int $sequenceId,
+		private bool $isCli,
+		private int $seconds,
+		private int $milliseconds,
+		private \DateTimeImmutable $createdAt,
 	) {
 	}
 
